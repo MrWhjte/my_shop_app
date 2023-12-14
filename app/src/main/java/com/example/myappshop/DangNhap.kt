@@ -1,22 +1,15 @@
 package com.example.myappshop
 
-import android.annotation.SuppressLint
-import android.content.Intent
-import android.graphics.Typeface
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.TextView
 
-class SplashActivity : AppCompatActivity() {
-    lateinit var tvGreeting:TextView
-    @SuppressLint("MissingInflatedId")
+class DangNhap : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContentView(R.layout.activity_dangnhap)
         @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController!!.hide(WindowInsets.Type.statusBars())
@@ -26,12 +19,5 @@ class SplashActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
-        Handler().postDelayed(
-            fun() {
-                startActivity(Intent(this@SplashActivity, DangNhap::class.java))
-                finish()
-            }, 3000
-        )
-
     }
 }
