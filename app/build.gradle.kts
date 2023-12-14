@@ -7,7 +7,9 @@ plugins {
 android {
     namespace = "com.example.myappshop"
     compileSdk = 33
-
+    buildFeatures{
+        viewBinding = true
+    }
     defaultConfig {
         applicationId = "com.example.myappshop"
         minSdk = 24

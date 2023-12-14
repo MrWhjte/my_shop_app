@@ -1,15 +1,19 @@
 package com.example.myappshop
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
+import com.example.myappshop.databinding.ActivityDangnhapBinding
 
 class DangNhap : AppCompatActivity() {
+    private var binding:ActivityDangnhapBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dangnhap)
+        binding = ActivityDangnhapBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
         @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController!!.hide(WindowInsets.Type.statusBars())
@@ -18,6 +22,10 @@ class DangNhap : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
+        }
+        binding?.signup?.setOnClickListener{
+            startActivity(Intent(this@DangNhap,DangKy::class.java))
+            finish()
         }
     }
 }
