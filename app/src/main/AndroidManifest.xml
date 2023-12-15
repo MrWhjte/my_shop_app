@@ -13,10 +13,20 @@
         android:theme="@style/Theme.MyAppShop"
         tools:targetApi="31">
         <activity
-            android:name=".DangKy"
+            android:name=".activities.ForgotPasswordActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activities.BaseActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".activities.DangKy"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -27,8 +37,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DangNhap"
-            android:exported="true"></activity>
+            android:name=".activities.DangNhap"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

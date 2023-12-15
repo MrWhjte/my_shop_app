@@ -1,19 +1,22 @@
-package com.example.myappshop
+package com.example.myappshop.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.WindowInsets
 import android.view.WindowManager
-import com.example.myappshop.databinding.ActivityDangnhapBinding
+import com.example.myappshop.databinding.ActivitySplashBinding
 
-class DangNhap : AppCompatActivity() {
-    private var binding:ActivityDangnhapBinding? = null
+class SplashActivity : AppCompatActivity() {
+    private lateinit var binding:ActivitySplashBinding
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDangnhapBinding.inflate(layoutInflater)
-        setContentView(binding?.root)
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController!!.hide(WindowInsets.Type.statusBars())
@@ -23,9 +26,13 @@ class DangNhap : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
-        binding?.signup?.setOnClickListener{
-            startActivity(Intent(this@DangNhap,DangKy::class.java))
-            finish()
-        }
+        Handler().postDelayed(
+            fun() {
+                startActivity(Intent(this@SplashActivity, DangNhap::class.java))
+                finish()
+            }, 3000
+        )
+
+
     }
 }

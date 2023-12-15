@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SplashActivity" >
+    tools:context=".activities.SplashActivity" >
 
     <ImageView
         android:id="@+id/imageView3"
@@ -14,7 +14,7 @@
         android:layout_marginTop="130dp"
         android:src="@drawable/logo" />
 
-    <TextView
+    <com.example.myappshop.utils.MSPTextViewBold
         android:id="@+id/tv_greeting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
         android:gravity="center"
         android:textSize="@dimen/splash_title_text_size"
         android:textStyle="bold"
-        android:textColor="@color/red"/>
+        android:textColor="#f03e3e"/>
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
