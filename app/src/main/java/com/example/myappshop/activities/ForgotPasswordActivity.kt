@@ -28,7 +28,6 @@ class ForgotPasswordActivity : BaseActivity() {
         }
         setupActionBar()
     }
-
     private fun setupActionBar() {
         setSupportActionBar(binding.toolbarForgotPassword)
         val actionBar = supportActionBar

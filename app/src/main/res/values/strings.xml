@@ -17,6 +17,7 @@
     <string name="err_msg_password_and_confirm_password_mismatch">Password and confirm password does not match.</string>
     <string name="err_msg_agree_terms_and_condition">Please agree terms and condition.</string>
     <string name="text_register_successful">Thanks for registering!</string>
+    <string name="text_status_successful_register">You are registered successfully</string>
 
     <string name="please_wait">Please waiting for seconds&#8230;</string>
     <string name="forgot_password_screen">FORGOT PASSWORD SCREEN</string>
@@ -25,5 +26,14 @@
     <string name="forgotPassWord_btn_Forgot">Gửi Email</string>
 
     <string name="text_send_mail_successful">Email sent successfully to rest your password.</string>
+    <string name="title_complete_profile">COMPLETE PROFILE</string>
+    <string name="content_description">user avartar</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="et_hint_email_id">Email</string>
+    <string name="et_hint_mobile_number">Phone number</string>
+    <string name="btn_male">MALE</string>
+    <string name="btn_female">FEMALE</string>
+    <string name="btn_submit">SUBMIT</string>
 
 </resources>

@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.WindowInsets
@@ -12,6 +13,8 @@ import android.view.WindowManager
 import android.widget.Toast
 import com.example.myappshop.R
 import com.example.myappshop.databinding.ActivityDangnhapBinding
+import com.example.myappshop.firestore.FirestoreClass
+import com.example.myappshop.models.User
 import com.google.firebase.auth.FirebaseAuth
 
 class DangNhap : BaseActivity(), View.OnClickListener {
@@ -85,10 +88,13 @@ class DangNhap : BaseActivity(), View.OnClickListener {
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, passWord)
                 .addOnCompleteListener { task ->
                     run {
-                        hideProgressDialog()
+
                         if (task!!.isSuccessful) {
-                            showErrorSnackBar("You are logged in successfully", false)
+                           FirestoreClass().getUserDetails(this@DangNhap)
+
+
                         } else {
+                            hideProgressDialog()
                             showErrorSnackBar(task.exception!!.message.toString(), true)
                         }
 
@@ -96,5 +102,19 @@ class DangNhap : BaseActivity(), View.OnClickListener {
                 }
 
         }
+    }
+
+    fun userLoggedInSuccess(user: User) {
+        hideProgressDialog()
+
+        Log.i("First Name: ",user.firstName)
+        Log.i("Last Name: ",user.lastName)
+        Log.i("Email: ",user.emaiAdd)
+        if(user.profileCompleted == 0){
+            startActivity(Intent(this@DangNhap,UserProfileActivity::class.java))
+        }else {
+            startActivity(Intent(this@DangNhap, MainActivity::class.java))
+        }
+        finish()
     }
 }

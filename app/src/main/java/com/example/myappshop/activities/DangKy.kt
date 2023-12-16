@@ -8,8 +8,11 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import com.example.myappshop.R
 import com.example.myappshop.databinding.ActivityDangKyBinding
+import com.example.myappshop.firestore.FirestoreClass
+import com.example.myappshop.models.User
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -61,13 +64,6 @@ class DangKy : BaseActivity() {
 
             TextUtils.isEmpty(binding.etLastname.text.toString().trim { it <= ' ' }) -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_last_name), true)
-                false
-            }
-
-            TextUtils.isEmpty(binding.etTenDangNhap.text.toString().trim { it <= ' ' })
-                    || binding.etTenDangNhap.text.toString().trim { it <= ' ' }.length < 6
-            -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_user_account), true)
                 false
             }
 
@@ -125,19 +121,24 @@ class DangKy : BaseActivity() {
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, passWord)
                 .addOnCompleteListener { task ->
                     run {
-                        hideProgressDialog()
                         //Nếu đăng ký thành công
                         if (task.isSuccessful) {
                             //Đăng ký thêm trên Firebase
                             val firebaseUserAccount: FirebaseUser = task.result!!.user!!
-                            showErrorSnackBar(
-                                "You are registered successfully. Your user id is ${firebaseUserAccount.uid}",
-                                false
+                            val user = User(
+                                firebaseUserAccount.uid,
+                                binding.etFirstName.text.toString().trim { it<=' ' },
+                                binding.etLastname.text.toString().trim{ it<= ' '},
+                                binding.etEmail.text.toString().trim {it<=' '},
                             )
-                            FirebaseAuth.getInstance().signOut()
-                            finish()
+
+                            FirestoreClass().registerUser(this@DangKy,user)
+
+                            //FirebaseAuth.getInstance().signOut()
+                            //finish()
 
                         } else {
+                            hideProgressDialog()
                             //Đăng ký không thành công
                             showErrorSnackBar(
                                 task.exception!!.message.toString(),
@@ -149,5 +150,9 @@ class DangKy : BaseActivity() {
                 }
 
         }
+    }
+    fun userRegisterSuccess(){
+        hideProgressDialog()
+        Toast.makeText(this@DangKy,resources.getString(R.string.text_status_successful_register),Toast.LENGTH_LONG).show()
     }
 }
