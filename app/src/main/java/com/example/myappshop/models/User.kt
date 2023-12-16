@@ -1,11 +1,16 @@
 package com.example.myappshop.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+import java.util.Date
+
+
+@Parcelize
 class User constructor(
     val id:String = "",
     val firstName: String = "",
     val lastName: String  = "",
     val emaiAdd :String = "",
-    val nickName:String = "",
     val image: String = "",
     val mobile: Long = 0,
     val gender: String = "",
@@ -14,6 +19,4 @@ class User constructor(
     val fcmToken:String = "",
     val profileCompleted:Int = 0,
     val isAdministrator:Int = 0,
-) {
-
-}
+):Parcelable

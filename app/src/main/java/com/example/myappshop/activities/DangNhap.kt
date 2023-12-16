@@ -15,6 +15,7 @@ import com.example.myappshop.R
 import com.example.myappshop.databinding.ActivityDangnhapBinding
 import com.example.myappshop.firestore.FirestoreClass
 import com.example.myappshop.models.User
+import com.example.myappshop.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 
 class DangNhap : BaseActivity(), View.OnClickListener {
@@ -111,7 +112,9 @@ class DangNhap : BaseActivity(), View.OnClickListener {
         Log.i("Last Name: ",user.lastName)
         Log.i("Email: ",user.emaiAdd)
         if(user.profileCompleted == 0){
-            startActivity(Intent(this@DangNhap,UserProfileActivity::class.java))
+            val intent:Intent = Intent(this@DangNhap,UserProfileActivity::class.java)
+            intent.putExtra(Constants.EXTRA_USER_DETAILS,user)
+            startActivity(intent)
         }else {
             startActivity(Intent(this@DangNhap, MainActivity::class.java))
         }

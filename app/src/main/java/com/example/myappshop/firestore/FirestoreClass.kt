@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import com.example.myappshop.activities.DangKy
 import com.example.myappshop.activities.DangNhap
+import com.example.myappshop.activities.UserProfileActivity
 import com.example.myappshop.models.User
 import com.example.myappshop.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
@@ -76,8 +77,32 @@ class FirestoreClass {
 
                 Log.e(
                     activity.javaClass.simpleName,
-                    "Error while getting user details."
+                    "Error while getting user details.",
+                    e)
+            }
+    }
+    fun updateUserProfileData(activity: Activity,userHashMap:HashMap<String,Any>){
+        mFireStore.collection(Constants.USERS).document(getCurrentUserId())
+            .update(userHashMap)
+            .addOnSuccessListener {
+                when(activity){
+                    is UserProfileActivity -> {
+                        activity.userProfileUpdateSuccess()
+                    }
+                }
+            }
+            .addOnFailureListener {e->
+                when(activity){
+                    is UserProfileActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                }
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while updating thee user details",
+                    e
                     )
+
             }
     }
 

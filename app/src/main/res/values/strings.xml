@@ -25,7 +25,11 @@
     <string name="forgotPassWord_text_Message">Vui lòng nhập email. Sau đó nhấn nút gửi email rồi trở về màn hình đăng nhập và nhập mật khẩu chúng tôi gửi cho bạn.</string>
     <string name="forgotPassWord_btn_Forgot">Gửi Email</string>
 
+    <string name="read_storage_permission_denied">Oops, you just denied the permission for storage. You can also allow it from settings.</string>
+
     <string name="text_send_mail_successful">Email sent successfully to rest your password.</string>
+
+    <string name="image_selection_failed">Image selection failed!</string>
     <string name="title_complete_profile">COMPLETE PROFILE</string>
     <string name="content_description">user avartar</string>
     <string name="hint_first_name">First Name</string>
@@ -35,5 +39,11 @@
     <string name="btn_male">MALE</string>
     <string name="btn_female">FEMALE</string>
     <string name="btn_submit">SUBMIT</string>
+    <string name="hint_birthday">Birthday</string>
+    <string name="hint_address">Address</string>
+    <string name="err_msg_enter_phone_number">Please enter a phone number\n</string>
+    <string name="err_msg_enter_birthday">Please enter a birthday</string>
+    <string name="err_msg_enter_address">Please enter a address</string>
+    <string name="msg_profile_update_success">Your profile is updated successfully.</string>
 
 </resources>

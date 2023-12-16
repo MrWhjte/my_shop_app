@@ -2,7 +2,7 @@
 <resources>
     <dimen name="toolbar_title_text_size">18sp</dimen>
     <dimen name="profile_user_image_size">150dp</dimen>
-    <dimen name="profile_user_image_marginTop">50dp</dimen>
+    <dimen name="profile_user_image_marginTop">20dp</dimen>
     <dimen name="splash_title_text_size">32sp</dimen>
     <dimen name="button_background_radius">10dp</dimen>
 
