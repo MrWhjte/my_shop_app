@@ -134,8 +134,8 @@ class DangKy : BaseActivity() {
 
                             FirestoreClass().registerUser(this@DangKy,user)
 
-                            //FirebaseAuth.getInstance().signOut()
-                            //finish()
+//                            FirebaseAuth.getInstance().signOut()
+//                            finish()
 
                         } else {
                             hideProgressDialog()

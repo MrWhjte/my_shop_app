@@ -76,9 +76,8 @@ class FirestoreClass {
 
                 Log.e(
                     activity.javaClass.simpleName,
-                    "Error while getting user details.",
-                    e
-                )
+                    "Error while getting user details."
+                    )
             }
     }
 
