@@ -36,6 +36,10 @@ class DangNhap : BaseActivity(), View.OnClickListener {
         binding?.signup?.setOnClickListener(this)
         binding?.signin?.setOnClickListener(this)
         binding?.getPass?.setOnClickListener(this)
+        //Auto Sign in
+//        if(FirestoreClass().getCurrentUserId()==FirebaseAuth.getInstance().currentUser!!.uid){
+//            startActivity(Intent(this@DangNhap, MainActivity::class.java))
+//        }
     }
 
     override fun onClick(p0: View?) {
@@ -108,9 +112,7 @@ class DangNhap : BaseActivity(), View.OnClickListener {
     fun userLoggedInSuccess(user: User) {
         hideProgressDialog()
 
-        Log.i("First Name: ",user.firstName)
-        Log.i("Last Name: ",user.lastName)
-        Log.i("Email: ",user.emaiAdd)
+
         if(user.profileCompleted == 0){
             val intent:Intent = Intent(this@DangNhap,UserProfileActivity::class.java)
             intent.putExtra(Constants.EXTRA_USER_DETAILS,user)

@@ -27,6 +27,8 @@ import java.io.IOException
 class UserProfileActivity : BaseActivity(), OnClickListener {
     private var binding: ActivityUserProfileBinding? = null
     private lateinit var mUserInfo: User
+    private var mUserProfileImageUrl: String = ""
+    private var mSelectedImageFileUri: Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUserProfileBinding.inflate(layoutInflater)
@@ -79,35 +81,52 @@ class UserProfileActivity : BaseActivity(), OnClickListener {
                 }
 
                 binding?.btnSubmit?.id -> {
+
                     if (validateUserProfileDetail()) {
                         //showErrorSnackBar("Your details are valid. You can update them",false)
-                        val userHashMap = HashMap<String, Any>()
-
-                        val mobilePhone =
-                            binding?.etMobileNumber?.text.toString().trim { it <= ' ' }
-                        val birthday = binding?.etBirthday?.text.toString().trim { it <= ' ' }
-                        val address = binding?.etAdd?.text.toString().trim { it <= ' ' }
-
-                        val gender = if (binding?.rbMale!!.isChecked) {
-                            Constants.MALE
-                        } else {
-                            Constants.FEMALE
-                        }
-
-
-                        if (mobilePhone.isNotEmpty()) {
-                            userHashMap[Constants.MOBILE] = mobilePhone.toLong()
-                        }
-                        userHashMap[Constants.GENDER] = gender
-                        userHashMap[Constants.BIRTHDAY] = birthday
-                        userHashMap[Constants.ADDRESS] = address
-
                         showProgressDialog(resources.getString(R.string.please_wait))
-                        FirestoreClass().updateUserProfileData(this, userHashMap)
+                        if (mSelectedImageFileUri != null) {
+                            FirestoreClass().uploadImageToCloudStorage(this, mSelectedImageFileUri)
+                        } else {
+                            updateUserProfileDetails()
+                        }
+
                     }
                 }
             }
         }
+    }
+
+    private fun updateUserProfileDetails() {
+        val userHashMap = HashMap<String, Any>()
+
+        val mobilePhone =
+            binding?.etMobileNumber?.text.toString().trim { it <= ' ' }
+        val birthday = binding?.etBirthday?.text.toString().trim { it <= ' ' }
+        val address = binding?.etAdd?.text.toString().trim { it <= ' ' }
+
+        val gender = if (binding?.rbMale!!.isChecked) {
+            Constants.MALE
+        } else {
+            Constants.FEMALE
+        }
+
+        if(mUserProfileImageUrl.isNotEmpty()){
+            userHashMap[Constants.USER_AVATAR] = mUserProfileImageUrl
+        }
+
+        if (mobilePhone.isNotEmpty()) {
+            userHashMap[Constants.MOBILE] = mobilePhone.toLong()
+        }
+        userHashMap[Constants.GENDER] = gender
+        userHashMap[Constants.BIRTHDAY] = birthday
+        userHashMap[Constants.ADDRESS] = address
+
+        //Cap nhat day du thong tin nguoi dung
+        userHashMap[Constants.COMPLETE_PROFILE] = 1
+
+        //showProgressDialog(resources.getString(R.string.please_wait))
+        FirestoreClass().updateUserProfileData(this, userHashMap)
     }
 
     fun userProfileUpdateSuccess() {
@@ -118,7 +137,7 @@ class UserProfileActivity : BaseActivity(), OnClickListener {
             resources.getString(R.string.msg_profile_update_success),
             Toast.LENGTH_LONG
         ).show()
-        startActivity(Intent(this@UserProfileActivity,MainActivity::class.java))
+        startActivity(Intent(this@UserProfileActivity, MainActivity::class.java))
         finish()
     }
 
@@ -149,10 +168,10 @@ class UserProfileActivity : BaseActivity(), OnClickListener {
             if (requestCode == Constants.PICK_IMAGE_REQUEST_CODE) {
                 if (data != null) {
                     try {
-                        val selectedImageFileUri = data.data!!
+                        mSelectedImageFileUri = data.data!!
                         //binding?.ivUserPhoto?.setImageURI(selectedImageFileUri)
                         GliderLoader(this).loadUserPicture(
-                            selectedImageFileUri,
+                            mSelectedImageFileUri!!,
                             binding?.ivUserPhoto!!
                         )
                         showErrorSnackBar("Success", false)
@@ -195,6 +214,12 @@ class UserProfileActivity : BaseActivity(), OnClickListener {
             }
         }
 
+    }
+
+    fun imageUploadSuccess(imageUri: String) {
+        //hideProgressDialog()
+        mUserProfileImageUrl = imageUri
+        updateUserProfileDetails()
     }
 
 }
