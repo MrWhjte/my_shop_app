@@ -1,13 +1,13 @@
-package com.example.myappshop.activities.ui.home
+package com.example.myappshop.ui.order
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class OrderViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+        value = "This is order Fragment"
     }
     val text: LiveData<String> = _text
 }

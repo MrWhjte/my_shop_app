@@ -1,4 +1,4 @@
-package com.example.myappshop.activities
+package com.example.myappshop.ui.activities
 
 import android.Manifest
 import android.app.Activity
@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -42,24 +41,61 @@ class UserProfileActivity : BaseActivity(), OnClickListener {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
-
         if (intent.hasExtra(Constants.EXTRA_USER_DETAILS)) {
             mUserInfo = intent.getParcelableExtra<User>(Constants.EXTRA_USER_DETAILS)!!
         }
-        binding?.etFirstName?.isEnabled = false
-        binding?.etFirstName?.setText(mUserInfo.firstName)
-
-        binding?.etLastName?.isEnabled = false
-        binding?.etLastName?.setText(mUserInfo.lastName)
-
         binding?.etEmail?.isEnabled = false
         binding?.etEmail?.setText(mUserInfo.emaiAdd)
+        binding?.etFirstName?.setText(mUserInfo.firstName)
+        binding?.etLastName?.setText(mUserInfo.lastName)
+        if(mUserInfo.profileCompleted == 0){
+            binding?.tvTitle?.text = resources.getString(R.string.title_complete_profile)
+            binding?.etFirstName?.isEnabled = false
 
+            binding?.etLastName?.isEnabled = false
+
+
+            binding?.etEmail?.isEnabled = false
+            binding?.etEmail?.setText(mUserInfo.emaiAdd)
+        }else {
+            binding?.etFirstName?.isEnabled = true
+            binding?.etLastName?.isEnabled = true
+            setupActionBar()
+            binding?.tvTitle?.text = resources.getString(R.string.title_edit_profile)
+            GliderLoader(this).loadUserPicture(mUserInfo.image,binding?.ivUserPhoto!!)
+
+
+            if(mUserInfo.mobile != 0L){
+                binding?.etMobileNumber?.setText(mUserInfo.mobile.toString())
+            }
+            if(mUserInfo.birthDay != ""){
+                binding?.etBirthday?.setText(mUserInfo.birthDay)
+            }
+            if(mUserInfo.address != ""){
+                binding?.etAdd?.setText(mUserInfo.address)
+            }
+            if(mUserInfo.gender == Constants.MALE){
+                binding?.rbMale?.isChecked = true
+            }else {
+                binding?.rbFemale?.isChecked = true
+            }
+
+        }
 
         binding?.btnSubmit?.setOnClickListener(this@UserProfileActivity)
         binding?.ivUserPhoto?.setOnClickListener(this@UserProfileActivity)
     }
-
+    private fun setupActionBar() {
+        setSupportActionBar(binding!!.toolbarUserProfileActivity)
+        val actionBar = supportActionBar
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_white_color_back_24dp)
+        }
+        binding!!.toolbarUserProfileActivity.setNavigationOnClickListener {
+            onBackPressed()
+        }
+    }
     override fun onClick(p0: View?) {
         if (p0 != null) {
             when (p0.id) {
@@ -105,6 +141,17 @@ class UserProfileActivity : BaseActivity(), OnClickListener {
         val birthday = binding?.etBirthday?.text.toString().trim { it <= ' ' }
         val address = binding?.etAdd?.text.toString().trim { it <= ' ' }
 
+        val firstName: String = binding?.etFirstName?.text.toString().trim {it <= ' '}
+        val lastName: String = binding?.etLastName?.text.toString().trim {it<=' ' }
+
+        if(mUserInfo.firstName != firstName){
+            userHashMap[Constants.FIRST_NAME] = firstName
+        }
+        if(lastName != mUserInfo.lastName){
+            userHashMap[Constants.LAST_NAME] = lastName
+        }
+
+
         val gender = if (binding?.rbMale!!.isChecked) {
             Constants.MALE
         } else {
@@ -115,12 +162,18 @@ class UserProfileActivity : BaseActivity(), OnClickListener {
             userHashMap[Constants.USER_AVATAR] = mUserProfileImageUrl
         }
 
-        if (mobilePhone.isNotEmpty()) {
+        if (mobilePhone.isNotEmpty() && mobilePhone != mUserInfo.mobile.toString()) {
             userHashMap[Constants.MOBILE] = mobilePhone.toLong()
         }
-        userHashMap[Constants.GENDER] = gender
-        userHashMap[Constants.BIRTHDAY] = birthday
-        userHashMap[Constants.ADDRESS] = address
+        if(gender.isNotEmpty() && gender != mUserInfo.gender) {
+            userHashMap[Constants.GENDER] = gender
+        }
+        if (birthday.isNotEmpty() && mUserInfo.birthDay != birthday) {
+            userHashMap[Constants.BIRTHDAY] = birthday
+        }
+        if(address.isNotEmpty() && mUserInfo.address != address) {
+            userHashMap[Constants.ADDRESS] = address
+        }
 
         //Cap nhat day du thong tin nguoi dung
         userHashMap[Constants.COMPLETE_PROFILE] = 1
@@ -137,7 +190,7 @@ class UserProfileActivity : BaseActivity(), OnClickListener {
             resources.getString(R.string.msg_profile_update_success),
             Toast.LENGTH_LONG
         ).show()
-        startActivity(Intent(this@UserProfileActivity, MainActivity::class.java))
+        startActivity(Intent(this@UserProfileActivity, DashboardActivity::class.java))
         finish()
     }
 
@@ -221,6 +274,7 @@ class UserProfileActivity : BaseActivity(), OnClickListener {
         mUserProfileImageUrl = imageUri
         updateUserProfileDetails()
     }
+
 
 }
 

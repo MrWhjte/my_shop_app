@@ -27,6 +27,8 @@ object Constants {
 
     const val USER_PROFILE_AVATAR:String = "userImage"
 
+    const val FIRST_NAME: String = "firstName"
+    const val LAST_NAME: String = "lastName"
     fun showImageChooser(activity: Activity) {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         activity.startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST_CODE)

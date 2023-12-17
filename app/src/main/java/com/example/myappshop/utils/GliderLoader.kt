@@ -8,11 +8,11 @@ import com.example.myappshop.R
 import java.io.IOException
 
 class GliderLoader constructor(val context:Context) {
-    fun loadUserPicture(imageURI: Uri,imageView:ImageView){
+    fun loadUserPicture(image: Any,imageView:ImageView){
         try {
             Glide
                 .with(context)
-                .load(imageURI)
+                .load(image)
                 .centerCrop()
                 .placeholder(R.drawable.ic_user_placeholder)
                 .into(imageView)

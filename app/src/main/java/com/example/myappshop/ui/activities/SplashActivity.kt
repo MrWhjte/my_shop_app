@@ -1,4 +1,4 @@
-package com.example.myappshop.activities
+package com.example.myappshop.ui.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -28,11 +28,12 @@ class SplashActivity : AppCompatActivity() {
         }
         Handler().postDelayed(
             fun() {
-                startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
+                startActivity(Intent(this@SplashActivity, DangNhap::class.java))
                 finish()
-            }, 5000
+            }, 3000
         )
 
 
     }
+
 }

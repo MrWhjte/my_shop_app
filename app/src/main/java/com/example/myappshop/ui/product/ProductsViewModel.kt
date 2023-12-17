@@ -1,13 +1,13 @@
-package com.example.myappshop.activities.ui.dashboard
+package com.example.myappshop.ui.product
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class ProductsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "This is product Fragment"
     }
     val text: LiveData<String> = _text
 }

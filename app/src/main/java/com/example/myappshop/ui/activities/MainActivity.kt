@@ -1,4 +1,4 @@
-package com.example.myappshop.activities
+package com.example.myappshop.ui.activities
 
 import android.annotation.SuppressLint
 import android.content.Context

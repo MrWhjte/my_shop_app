@@ -20,34 +20,39 @@
         android:theme="@style/Theme.MyAppShop"
         tools:targetApi="31">
         <activity
-            android:name=".activities.DashboardActivity"
+            android:name=".ui.activities.SettingsActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activities.DashboardActivity"
             android:exported="false"
             android:label="@string/title_activity_dashboard"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.DashboardActivity"/>
+            android:theme="@style/Theme.DashboardActivity" />
         <activity
-            android:name=".activities.UserProfileActivity"
+            android:name=".ui.activities.UserProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ForgotPasswordActivity"
+            android:name=".ui.activities.ForgotPasswordActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.BaseActivity"
+            android:name=".ui.activities.BaseActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.DangKy"
+            android:name=".ui.activities.DangKy"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.SplashActivity"
+            android:name=".ui.activities.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -58,7 +63,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.DangNhap"
+            android:name=".ui.activities.DangNhap"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

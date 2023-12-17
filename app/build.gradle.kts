@@ -42,6 +42,7 @@ android {
 }
 
 dependencies {
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     val nav_version = "2.5.3"
     implementation("com.google.firebase:firebase-firestore-ktx:24.10.0")
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))

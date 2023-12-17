@@ -1,4 +1,4 @@
-package com.example.myappshop.activities
+package com.example.myappshop.ui.activities
 
 import android.content.Intent
 import android.os.Build
@@ -42,7 +42,7 @@ class DangNhap : BaseActivity(), View.OnClickListener {
         if (p0 != null) {
             when (p0.id) {
                 binding?.getPass?.id -> {
-                    startActivity(Intent(this@DangNhap,ForgotPasswordActivity::class.java))
+                    startActivity(Intent(this@DangNhap, ForgotPasswordActivity::class.java))
                 }
 
                 binding?.signin?.id -> {
@@ -110,7 +110,7 @@ class DangNhap : BaseActivity(), View.OnClickListener {
 
 
         if(user.profileCompleted == 0){
-            val intent:Intent = Intent(this@DangNhap,UserProfileActivity::class.java)
+            val intent:Intent = Intent(this@DangNhap, UserProfileActivity::class.java)
             intent.putExtra(Constants.EXTRA_USER_DETAILS,user)
             startActivity(intent)
         }else {
@@ -118,4 +118,5 @@ class DangNhap : BaseActivity(), View.OnClickListener {
         }
         finish()
     }
+
 }

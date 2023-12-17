@@ -1,14 +1,12 @@
-package com.example.myappshop.activities
+package com.example.myappshop.ui.activities
 
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
 import com.example.myappshop.R
 import com.example.myappshop.databinding.ActivityForgotPasswordBinding
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 
 class ForgotPasswordActivity : BaseActivity() {
@@ -66,5 +64,6 @@ class ForgotPasswordActivity : BaseActivity() {
         }
 
     }
+
 
 }

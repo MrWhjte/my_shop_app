@@ -4,10 +4,11 @@ import android.app.Activity
 import android.content.Context
 import android.net.Uri
 import android.util.Log
-import com.example.myappshop.activities.DangKy
-import com.example.myappshop.activities.DangNhap
-import com.example.myappshop.activities.UserProfileActivity
+import com.example.myappshop.ui.activities.DangKy
+import com.example.myappshop.ui.activities.DangNhap
+import com.example.myappshop.ui.activities.UserProfileActivity
 import com.example.myappshop.models.User
+import com.example.myappshop.ui.activities.SettingsActivity
 import com.example.myappshop.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -67,12 +68,18 @@ class FirestoreClass {
                     is DangNhap -> {
                         activity.userLoggedInSuccess(user)
                     }
+                    is SettingsActivity -> {
+                        activity.userDetailsSuccess(user)
+                    }
                 }
             }
             .addOnFailureListener { e ->
                 // Hide the progress dialog if there is any error. And print the error in log.
                 when (activity) {
                     is DangNhap -> {
+                        activity.hideProgressDialog()
+                    }
+                    is SettingsActivity -> {
                         activity.hideProgressDialog()
                     }
                 }

@@ -8,9 +8,12 @@
     <style name="Theme.MyAppShop" parent="Base.Theme.MyAppShop" />
     <style name="Theme.DashboardActivity" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
 
+
     </style>
     <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+
 </resources>

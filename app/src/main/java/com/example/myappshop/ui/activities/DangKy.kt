@@ -1,9 +1,7 @@
-package com.example.myappshop.activities
+package com.example.myappshop.ui.activities
 
 import android.content.Intent
-import android.media.MediaPlayer.OnCompletionListener
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.WindowInsets
@@ -13,8 +11,6 @@ import com.example.myappshop.R
 import com.example.myappshop.databinding.ActivityDangKyBinding
 import com.example.myappshop.firestore.FirestoreClass
 import com.example.myappshop.models.User
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -155,4 +151,5 @@ class DangKy : BaseActivity() {
         hideProgressDialog()
         Toast.makeText(this@DangKy,resources.getString(R.string.text_status_successful_register),Toast.LENGTH_LONG).show()
     }
+
 }
