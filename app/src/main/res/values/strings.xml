@@ -45,5 +45,9 @@
     <string name="err_msg_enter_birthday">Please enter a birthday</string>
     <string name="err_msg_enter_address">Please enter a address</string>
     <string name="msg_profile_update_success">Your profile is updated successfully.</string>
+    <string name="title_activity_dashboard">Dashboard Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

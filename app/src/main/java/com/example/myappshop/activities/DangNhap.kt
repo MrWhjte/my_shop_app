@@ -2,15 +2,11 @@ package com.example.myappshop.activities
 
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Toast
 import com.example.myappshop.R
 import com.example.myappshop.databinding.ActivityDangnhapBinding
 import com.example.myappshop.firestore.FirestoreClass
@@ -118,7 +114,7 @@ class DangNhap : BaseActivity(), View.OnClickListener {
             intent.putExtra(Constants.EXTRA_USER_DETAILS,user)
             startActivity(intent)
         }else {
-            startActivity(Intent(this@DangNhap, MainActivity::class.java))
+            startActivity(Intent(this@DangNhap, DashboardActivity::class.java))
         }
         finish()
     }
